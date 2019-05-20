@@ -1,0 +1,16 @@
+import rtconfig
+from building import *
+
+cwd     = GetCurrentDir()
+CPPPATH = [cwd, str(Dir('#')), cwd + "/app", cwd + "/driver"]
+
+src     = Glob('*.c')
+src     += Split("""
+app/app_ae.c
+app/app_tev.c
+app/modbus_slave.c
+""")
+
+group = DefineGroup('Applications', src, depend = [''], CPPPATH = CPPPATH)
+
+Return('group')
